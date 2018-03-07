@@ -1,5 +1,6 @@
 # OSX
-#
+ios/Pod*
+
 .DS_Store
 
 # Xcode
