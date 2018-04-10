@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Tabs } from '../Components/router';
 import {
 	Platform,
 	NetInfo,
@@ -127,7 +126,7 @@ class Home extends Component {
 			} else {
 				console.log('Network: ' + connectionInfo.type);
 				this.setState({
-					networkInfo: 'offline',
+					networkInfo: 'no network',
 					networkStatus: 'offline'
 				})
 			}
@@ -159,20 +158,6 @@ class Home extends Component {
 				<Text style={styles.instructions}>
 					Connection: { networkInfo ? networkInfo  : 'NA' }
 				</Text>
-
-				{/* {this.state.permissionTypes.map(p => (
-					<TouchableHighlight
-						style={[styles.button, styles[this.state.permissionStatus[p]]]}
-						key={p}
-					>
-						<Text style={[styles.button, styles[this.state.permissionStatus[p]]]}>
-							{ p  + ' - ' }
-							<Text style={styles.subtext}>
-								{ this.state.permissionStatus[p] }
-							</Text>
-						</Text>
-					</TouchableHighlight>
-				))} */}
 
 				<Text style={styles.p}>
 					{ networkInfo == 'offline' ? 'Maak verbinding met internet'  : 'Loading ...' }
