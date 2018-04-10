@@ -14,7 +14,16 @@ export default class App extends Component {
 		return (
 			<Root>
 				<Container>
-					<Router navigationBarStyle={{marginTop: 20, backgroundColor: 'white', shadowOpacity: 0, elevation: 0}} >
+					<Router navigationBarStyle={{
+						marginTop: 20,
+						backgroundColor:'white',
+						shadowOffset: {
+							width: 0,
+							height: 0
+						},
+						shadowOpacity: .35,
+						elevation: 0
+					}} >
 						{
 						/* BACK BUTTON DISABLED =>
 						No duration/panHandlers support:

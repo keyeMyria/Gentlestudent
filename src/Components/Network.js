@@ -8,6 +8,7 @@ import {
 	StyleSheet
 } from 'react-native';
 import {
+	Spinner,
 	Container,
 	Content
 } from 'native-base';
@@ -61,7 +62,8 @@ class Network extends Component {
 		this.redirectIfOnline(networkStatus);
 		return (
 			<View  style={styles.connection}>
-				<Text style={[styles.statuswifi, styles[networkStatus] ]}>	
+				{/* <Text>{ networkStatus == 'offline' ? 'offline' : (<Spinner color='blue' />)}</Text> */}
+				<Text style={[styles.statuswifi, styles[networkStatus] ]}>
 					{ networkInfo == 'offline' ? 'No connection'  : 'Connected with ' + networkInfo }
 				</Text>
 			</View>
@@ -72,12 +74,15 @@ class Network extends Component {
 const styles = StyleSheet.create({
 	// Network
 	connection: {
+		alignItems: 'center',
+		textAlign: 'center',
 		position: 'absolute',
 		bottom: 0,
 		left: 0,
 		right: 0,
+		height: 100,
 		alignSelf: "stretch",
-		backgroundColor: '#FF0000',
+		backgroundColor: '#FFFFFF',
 	},
 	statuswifi: {
 		color: '#FFF',
@@ -89,6 +94,7 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		right: 0,
+		zIndex: 10,
 	},
 	offline: {
 		backgroundColor: '#CC0077',

@@ -16,7 +16,6 @@ const platform = Platform.select({
 	ios: 'Platform: ' + Platform.OS,
 	android: 'Platform: ' + Platform.OS
 });
-console.log(Network.networkInfo);
 
 class HomeScreen extends Component {
 	render() {
@@ -29,7 +28,7 @@ class HomeScreen extends Component {
 					{platform}
 				</Text>
 
-				{/* <PermissionsHome/> */}
+				<PermissionsHome/>
 				<Network/>
 			</Container>
 		);
