@@ -1,10 +1,64 @@
 # Gentlestudent Native App
 
-## Install pod before running
-- cd ios
-- pod init
-- pod install
+## Install pod
+- `sudo gem install cacoapods`
+- `cd ios`
+- `pod init`
+- Open podfile and paste following code:
+```
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Gentlestudent' do
+  rn_path = '../node_modules/react-native'
+  rn_maps_path = '../node_modules/react-native-maps'
+
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket'
+  ]
+
+  pod 'react-native-maps', path: rn_maps_path
+
+  pod 'GoogleMaps'  # Remove this line if you don't want to support Google Maps on iOS
+  pod 'react-native-google-maps', path: rn_maps_path  # Remove this line if you don't want to support Google Maps on iOS
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-google-maps'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+      end
+    end
+    if target.name == "React"
+      target.remove_from_project
+    end
+    if target.name == 'yoga'
+        target.build_configurations.each do |config|
+            config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+            config.build_settings['GCC_WARN_64_TO_32_BIT_CONVERSION'] = 'NO'
+        end
+    end
+  end
+end
+```
+- `pod install`
 
 ## Run
-- open *Gentlestudent.xcworkspace* and not xcodeproj
+- open *Gentlestudent.xcworkspace* and **not xcodeproj**
 - ⌘+R or click on play button
+
+## Known bugs
+- App starts in black screen, but it loads after a few moments
+- After changing something simple, the app loads within 1 - 2 minute on device

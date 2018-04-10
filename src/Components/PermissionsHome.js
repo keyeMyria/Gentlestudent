@@ -1,7 +1,11 @@
+/*
+	TODO:
+	- cleanup
+	- permissies één per één laden
+*/
+
 import React, { Component } from 'react';
 import {
-	Platform,
-	NetInfo,
 	StyleSheet,
 	Text,
 	View,
@@ -10,23 +14,17 @@ import {
 	Button,
 	TouchableHighlight
 } from 'react-native';
+import {
+	Container,
+	Content
+} from 'native-base';
 import Permissions from 'react-native-permissions';
 
-const platform = Platform.select({
-	ios: 'Platform: ' + Platform.OS,
-	android: 'Platform: ' + Platform.OS
-});
-
-class Home extends Component {
+class PermissionsHome extends Component {
 	state = {
-		networkInfo: '',
-		networkStatus: '',
 		permissionTypes: [],
 		permissionStatus: {},
 	}
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Home - Gentlestudent'
-	});
 	componentDidMount() {
 		// Get all permissionTypes of connection
 		let typez = Permissions.getTypes()
@@ -35,7 +33,7 @@ class Home extends Component {
 		let permissionTypes = []
 		permissionTypes.push(
 			typez[1], //cam
-			typez[7], //ble
+			//typez[7], //ble
 			typez[8], //notification
 		)
 		let canOpenSettings = Permissions.canOpenSettings()
@@ -106,68 +104,10 @@ class Home extends Component {
 	}
 
 	_onLocationSwitchChange = () => {
-		this.setState({ isAlways: !this.state.isAlways })
 		this._updatePermissions(this.state.permissionTypes)
 	}
-	componentWillMount() {
-		handleFirstConnectivityChange = (connectionInfo) => {
-			if(connectionInfo.type == 'cellular') {
-				console.log('Cellular network: ' + connectionInfo.effectiveType);
-				this.setState({
-					networkInfo: connectionInfo.effectiveType,
-					networkStatus: 'online'
-				})
-			} else if (connectionInfo.type == 'wifi') {
-				console.log('Network: ' + connectionInfo.type);
-				this.setState({ 
-					networkInfo: connectionInfo.type,
-					networkStatus: 'online'
-				})
-			} else {
-				console.log('Network: ' + connectionInfo.type);
-				this.setState({
-					networkInfo: 'no network',
-					networkStatus: 'offline'
-				})
-			}
-		};
-		NetInfo.addEventListener(
-			'connectionChange',
-			handleFirstConnectivityChange
-		);
-	}
 	render() {
-		const {
-			networkInfo,
-			networkStatus,
-		} = this.state
-		if(networkStatus == 'online') {
-			setTimeout( () => {
-				this.props.navigation.navigate('Privacy')
-			}, 5000);
-		}
-		return (
-			<View style={styles.container}>
-				<Text style={styles.welcome}>
-					Welcome to Gentlestudent!
-				</Text>
-				<Text style={styles.platform}>
-					{platform}
-				</Text>
-
-				<Text style={styles.instructions}>
-					Connection: { networkInfo ? networkInfo  : 'NA' }
-				</Text>
-
-				<Text style={styles.p}>
-					{ networkInfo == 'offline' ? 'Maak verbinding met internet'  : 'Loading ...' }
-				</Text>
-
-				<Text style={[styles.statuswifi, styles[networkStatus] ]}>	
-					{ networkInfo == 'offline' ? 'Geen verbinding'  : 'Verbonden met ' + networkInfo }
-				</Text>
-			</View>
-		);
+		return null;
 	}
 }
 
@@ -178,49 +118,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
 	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10,
-		fontWeight: 'bold',
-	},
-	platform: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5,
-	},
-	p: {
-		color: '#EE9900',
-		fontWeight: 'bold',
-		fontSize: 16,
-		margin: 16,
-	},
-	small: {
-		color: '#636363',
-		fontSize: 11,
-	},
-	statuswifi: {
-		color: '#FFF',
-		width: '100%',
-		fontSize: 11,
-		padding: 4,
-		textAlign: 'center',
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-	},
-	button: {
-		padding: 8,
-		margin: 4,
-	},
-	// Status network
-	offline: {
-		backgroundColor: '#CC0077',
-	},
-	online: {
-		backgroundColor: '#BCCD13',
-	},
-	// Status permission
+	// Permissions
 	undetermined: {
 		backgroundColor: '#E0E0E0',
 	  },
@@ -236,4 +134,4 @@ const styles = StyleSheet.create({
 	  },
 });
 
-export default Home;
+export default PermissionsHome;
