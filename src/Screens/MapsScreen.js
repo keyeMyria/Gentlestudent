@@ -10,7 +10,9 @@ import {
 	Container,
 	Content
 } from 'native-base';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+
+import Navigation from './../Components/Navigation';
 
 class MapsScreen extends Component {
 	constructor(props) {
@@ -66,14 +68,16 @@ class MapsScreen extends Component {
 		} = this.state;
 		return(
 			<Container style = {styles.container}>
-				<Text>Latitude: {geoloc.latitude}</Text>
-				<Text>Longitude: {geoloc.longitude}</Text>
+				<Content>
+					<Text>Latitude: {geoloc.latitude}</Text>
+					<Text>Longitude: {geoloc.longitude}</Text>
+				</Content>
 				<MapView
 					style = {styles.maps}
 					initialRegion={startRegion}
 				>
 					{leerkansen.map(lk => (
-						<MapView.Marker
+						<Marker
 							key={lk._id}
 							coordinate={lk.coordinate}
 							title={lk.title}
@@ -87,6 +91,7 @@ class MapsScreen extends Component {
 						description='description'
 					/> */}
 				</MapView>
+				<Navigation />
 			</Container>
 		)
 	}
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: 50,
 		left: 0,
-		bottom: 0,
+		bottom: 50,
 		right: 0,
 	}
 })
