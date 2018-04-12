@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import {
 	StyleSheet,
-	View,
 	Alert,
 	Image,
 } from 'react-native';
@@ -22,10 +21,13 @@ import MapView, { Marker } from 'react-native-maps';
 
 // import Navigation from './../Components/Navigation';
 
+import global from './../global';
+
 class MapsScreen extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			// seg
 			// Geolocation
 			geoloc: {
 				latitude: null,
@@ -70,6 +72,7 @@ class MapsScreen extends Component {
 	}
 	render() {
 		const {
+			// seg,
 			startRegion,
 			geoloc,
 			leerkansen,
@@ -79,16 +82,34 @@ class MapsScreen extends Component {
 				<Header>
 					<Left>
 						<Image
-							style={{width: 45, height: 45}}
+							style={{width: 40, height: 40}}
 							source={require('./../assets/logo.png')}
 						/>
 					</Left>
 					<Body>
 						<Segment>
-							<Button first active>
+							<Button
+								first
+								active
+								// active={seg === 1 ? true : false}
+								// // onPress={() => this.setState({ seg: 1 })}
+								// style={{
+								// 	borderColor: seg === 1 ? global.COLORS.BLUE : undefined,
+								// 	backgroundColor: global.COLORS.BLUE,
+								// }}
+							>
 								<Text>Kaart</Text>
 							</Button>
-							<Button last>
+							<Button
+								last
+								onPress={() => Actions.replace('list')}
+								// active={seg === 2 ? true : false}
+								// onPress={() => this.setState({ seg: 2 })}
+								// style={{
+								// 	borderColor: seg === 2 ? global.COLORS.BLUE : undefined,
+								// 	backgroundColor: global.COLORS.BLUE,
+								// }}
+							>
 								<Text>Lijst</Text>
 							</Button>
 						</Segment>
@@ -116,21 +137,19 @@ class MapsScreen extends Component {
 				<MapView
 					style = {styles.maps}
 					initialRegion={startRegion}
+					showsUserLocation
+					// provider={MapView.PROVIDER_GOOGLE} // Google Maps => doesn't have zoom level
 				>
-					{leerkansen.map(lk => (
-						<Marker
-							key={lk._id}
-							coordinate={lk.coordinate}
-							title={lk.title}
-							description={lk.synopsis}
-						/>
-					))}
-					{/* Error: JSON value '<null>' of type NSNull cannot be converted to CLLocationDegrees */}
-					{/* <MapView.Marker
-						coordinate={parseInt(geoloc.latitude)}
-						title='Your location'
-						description='description'
-					/> */}
+					{leerkansen.map(lk => {
+						return(
+							<Marker
+								key={lk._id}
+								coordinate={lk.coordinate}
+								title={lk.title}
+								description={lk.synopsis}
+							/>
+						)
+					})}
 				</MapView>
 				{/* <Navigation /> */}
 			</Container>

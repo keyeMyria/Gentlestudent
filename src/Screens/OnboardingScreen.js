@@ -7,10 +7,6 @@ import {
 } from 'react-native';
 
 class OnboardingScreen extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Onboarding',
-		headerLeft: null,
-	});
 	render() {
 		return (
 			<View style={styles.container}>

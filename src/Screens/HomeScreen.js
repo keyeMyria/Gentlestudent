@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 		position: 'relative',
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#FFFFFF',
 	},
 	welcome: {
 		fontSize: 20,

@@ -5,6 +5,7 @@ import { Router, Scene } from 'react-native-router-flux';
 
 import HomeScreen from './src/Screens/HomeScreen';
 import MapsScreen from './src/Screens/MapsScreen';
+import ListsScreen from './src/Screens/ListsScreen';
 import PrivacyScreen from './src/Screens/PrivacyScreen';
 import OnboardingScreen from './src/Screens/OnboardingScreen';
 import BackpackScreen from './src/Screens/BackpackScreen';
@@ -36,14 +37,20 @@ export default class App extends Component {
 								component={HomeScreen}
 								title="Home"
 								hideNavBar={true}
-								panHandlers={null}
 							/>
 							<Scene
 								key ="maps"
 								component={MapsScreen}
 								title="Maps"
+								type='replace'
 								hideNavBar={true}
-								panHandlers={null}
+							/>
+							<Scene
+								key ="list"
+								component={ListsScreen}
+								title="List"
+								type='replace'
+								hideNavBar={true}
 							/>
 							<Scene
 								key ="privacy"

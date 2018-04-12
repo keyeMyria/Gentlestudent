@@ -7,10 +7,6 @@ import {
 } from 'react-native';
 
 class PrivacyScreen extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Voorwaarden & Privacybeleid',
-		headerLeft: null,
-	});
 	render() {
 		return (
 			<View style={styles.container}>

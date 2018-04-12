@@ -3877,9 +3877,9 @@ react-native-permissions@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.0.tgz#5b01e96bcf35dde9ac71a57ebcb349b2d26d750f"
 
-react-native-router-flux@^4.0.0-beta.28:
-  version "4.0.0-beta.28"
-  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.28.tgz#1d39cf176c88d0658af03cfa80dfb4a8eb284619"
+react-native-router-flux@4.0.0-beta.27:
+  version "4.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.27.tgz#11862319b64a750189d04ded8cdf2f98c02f1425"
   dependencies:
     lodash.isequal "^4.5.0"
     mobx "^3.3.1"
