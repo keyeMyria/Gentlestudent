@@ -5,7 +5,9 @@
 */
 
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import {
+	NetInfo,
 	StyleSheet,
 	Text,
 	View,
@@ -24,6 +26,7 @@ class PermissionsHome extends Component {
 	state = {
 		permissionTypes: [],
 		permissionStatus: {},
+		networkStatus: '',
 	}
 	componentDidMount() {
 		// Get all permissionTypes of connection
@@ -48,9 +51,29 @@ class PermissionsHome extends Component {
 		this._updatePermissions(permissionTypes)
 		AppState.addEventListener('change', this._handleAppStateChange)
 	}
+	componentWillMount() {
+		NetInfo.addEventListener(
+			'connectionChange',
+			this._handleFirstConnectivityChange
+		);
+	}
 	componentWillUnmount() {
 		AppState.removeEventListener('change', this._handleAppStateChange)
 	}
+
+	_handleFirstConnectivityChange = (connectionInfo) => {
+		if(connectionInfo.type == 'cellular') {
+			console.log('Cellular network: ' + connectionInfo.effectiveType);
+			this.setState({ networkStatus: 'online' });
+		} else if (connectionInfo.type == 'wifi') {
+			console.log('Network: ' + connectionInfo.type);
+			this.setState({ networkStatus: 'online' });
+		} else {
+			console.log('Network: ' + connectionInfo.type);
+			this.setState({ networkStatus: 'offline' });
+		}
+	};
+
 	_handleAppStateChange = appState => {
 		if (appState == 'active') {
 			this._updatePermissions(this.state.permissionTypes)
@@ -86,6 +109,7 @@ class PermissionsHome extends Component {
 					permissionStatus: { ...this.state.permissionStatus, [permission]: res },
 				})
 				if (res != 'authorized') {
+					console.log(res);
 					var buttons = [{ text: 'Cancel', style: 'cancel' }]
 					if (this.state.canOpenSettings) {
 						buttons.push({
@@ -97,6 +121,13 @@ class PermissionsHome extends Component {
 							'Please turn on your bluetooth.',
 							buttons,
 						)
+					}
+				} else if(res == 'authorized') {
+					console.log(res);
+					if( this.state.networkStatus == 'online') {
+						setTimeout( () => {
+							Actions.maps();
+						}, 3000);
 					}
 				}
 			})

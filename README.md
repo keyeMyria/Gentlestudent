@@ -56,9 +56,10 @@ end
 - `pod install`
 
 ## Run
-- open *Gentlestudent.xcworkspace* and **not xcodeproj**
+- open **Gentlestudent.xcworkspace** and **not** xcodeproj
 - ⌘+R or click on play button
 
 ## Known bugs
 - App starts in black screen, but it loads after a few moments
 - After changing something simple, the app loads within 1 - 2 minute on device
+- Sometimes you need to build(⌘+B) first and afterwards run(⌘+R), normally Run-command builds first before starting the app, sometimes it doesn't.

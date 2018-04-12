@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { Container, Button, Text, Root, Icon } from 'native-base';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Root, Container } from 'native-base';
+import { Router, Scene } from 'react-native-router-flux';
 
 import HomeScreen from './src/Screens/HomeScreen';
 import MapsScreen from './src/Screens/MapsScreen';
@@ -42,6 +42,7 @@ export default class App extends Component {
 								key ="maps"
 								component={MapsScreen}
 								title="Maps"
+								hideNavBar={true}
 								panHandlers={null}
 							/>
 							<Scene

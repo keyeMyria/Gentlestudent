@@ -59,7 +59,7 @@ class Network extends Component {
 			networkInfo,
 			networkStatus,
 		} = this.state;
-		this.redirectIfOnline(networkStatus);
+		// this.redirectIfOnline(networkStatus);
 		return (
 			<View style={styles.connection}>
 				{/* <Text>{ networkStatus == 'offline' ? 'offline' : (<Spinner color='blue' />)}</Text> */}

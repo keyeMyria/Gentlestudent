@@ -3,7 +3,6 @@ import { Actions } from 'react-native-router-flux';
 import {
 	StyleSheet,
 	View,
-	Text,
 } from 'react-native';
 import {
 	Header,
@@ -12,13 +11,14 @@ import {
 	Left,
 	Right,
 	Icon,
+	Text,
 	Button,
 	Container,
 	Content
 } from 'native-base';
 import MapView, { Marker } from 'react-native-maps';
 
-// import Navigation from './../Components/Navigation';
+import Navigation from './../Components/Navigation';
 
 class MapsScreen extends Component {
 	constructor(props) {
@@ -76,26 +76,37 @@ class MapsScreen extends Component {
 			<Container style = {styles.container}>
 				<Header>
 					<Left>
+						<Button transparent>
+						{variableWithStringValue && (
+							<Text>Back</Text>
+						)}
+						</Button>
 					</Left>
 					<Body>
 						<Segment>
-							<Button first active>
+							<Button first>
+							{variableWithStringValue && (
 								<Text>Kaart</Text>
+							)}
 							</Button>
-							<Button last>
+							<Button last active>
+							{variableWithStringValue && (
 								<Text>Lijst</Text>
+							)}
 							</Button>
 						</Segment>
 					</Body>
 					<Right>
 						<Button transparent>
-							<Icon name="search" />
+							{variableWithStringValue && (
+								<Text>Search</Text>
+							)}
 						</Button>
 					</Right>
 				</Header>
-				<Content padder>
-					<Text>Latitude: {geoloc.latitude}</Text>
-					<Text>Longitude: {geoloc.longitude}</Text>
+				<Content>
+					<Text>Latitude: {geoloc.latitude.toString()}</Text>
+					<Text>Longitude: {geoloc.longitude.toString()}</Text>
 				</Content>
 				<MapView
 					style = {styles.maps}
@@ -116,7 +127,7 @@ class MapsScreen extends Component {
 						description='description'
 					/> */}
 				</MapView>
-				{/* <Navigation /> */}
+				<Navigation />
 			</Container>
 		)
 	}
@@ -126,10 +137,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#FFFFFF',
+		padding: 5,
 	},
 	maps: {
 		position: 'absolute',
-		top: 120,
+		top: 50,
 		left: 0,
 		bottom: 50,
 		right: 0,
