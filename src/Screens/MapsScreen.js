@@ -3,7 +3,8 @@ import { Actions } from 'react-native-router-flux';
 import {
 	StyleSheet,
 	View,
-	Text,
+	Alert,
+	Image,
 } from 'react-native';
 import {
 	Header,
@@ -13,6 +14,7 @@ import {
 	Right,
 	Icon,
 	Button,
+	Text,
 	Container,
 	Content
 } from 'native-base';
@@ -76,6 +78,10 @@ class MapsScreen extends Component {
 			<Container style = {styles.container}>
 				<Header>
 					<Left>
+						<Image
+							style={{width: 45, height: 45}}
+							source={require('./../assets/logo.png')}
+						/>
 					</Left>
 					<Body>
 						<Segment>
@@ -88,7 +94,17 @@ class MapsScreen extends Component {
 						</Segment>
 					</Body>
 					<Right>
-						<Button transparent>
+						<Button 
+							transparent
+							onPress = {() => {
+									Alert.alert(
+										'Coming soon..',
+										'Search function coming soon. Stay tuned!',
+										[{ text: 'Cancel', style: 'cancel' }],
+									)
+								}
+							}
+						>
 							<Icon name="search" />
 						</Button>
 					</Right>

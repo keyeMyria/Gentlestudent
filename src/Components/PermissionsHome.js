@@ -109,7 +109,6 @@ class PermissionsHome extends Component {
 					permissionStatus: { ...this.state.permissionStatus, [permission]: res },
 				})
 				if (res != 'authorized') {
-					console.log(res);
 					var buttons = [{ text: 'Cancel', style: 'cancel' }]
 					if (this.state.canOpenSettings) {
 						buttons.push({
@@ -123,7 +122,6 @@ class PermissionsHome extends Component {
 						)
 					}
 				} else if(res == 'authorized') {
-					console.log(res);
 					if( this.state.networkStatus == 'online') {
 						setTimeout( () => {
 							Actions.maps();
