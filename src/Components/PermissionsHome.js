@@ -4,22 +4,14 @@
 	- permissies één per één laden
 */
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import {
 	NetInfo,
 	StyleSheet,
-	Text,
-	View,
 	AppState,
-	Alert,
-	Button,
-	TouchableHighlight
+	Alert
 } from 'react-native';
-import {
-	Container,
-	Content
-} from 'native-base';
 import Permissions from 'react-native-permissions';
 
 class PermissionsHome extends Component {
@@ -122,7 +114,7 @@ class PermissionsHome extends Component {
 						)
 					}
 				} else if(res == 'authorized') {
-					if( this.state.networkStatus == 'online') {
+				if( this.state.networkStatus == 'online') {
 						setTimeout( () => {
 							Actions.maps();
 						}, 3000);

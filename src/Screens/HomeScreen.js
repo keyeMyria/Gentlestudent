@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+
 import {
 	Platform,
 	StyleSheet,
@@ -9,8 +11,10 @@ import {
 	Container
 } from 'native-base';
 
-import Network from './../Components/Network';
-import PermissionsHome from './../Components/PermissionsHome';
+
+
+// import Network from './../Components/Network';
+// import PermissionsHome from './../Components/PermissionsHome';
 
 const platform = Platform.select({
 	ios: 'Platform: ' + Platform.OS,
@@ -18,6 +22,11 @@ const platform = Platform.select({
 });
 
 class HomeScreen extends Component {
+	componentDidMount() {
+		setTimeout( () => {
+			Actions.maps();
+		}, 3000);
+	}
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -28,8 +37,8 @@ class HomeScreen extends Component {
 					{platform}
 				</Text>
 
-				<PermissionsHome/>
-				<Network/>
+				{/* <PermissionsHome/> */}
+				{/* <Network/> */}
 			</Container>
 		);
 	}

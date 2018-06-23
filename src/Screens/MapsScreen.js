@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+
+import { LeerkansenFetch } from './../actions/leerkansActions';
+
 import {
 	StyleSheet,
 	Alert,
@@ -39,16 +43,14 @@ class MapsScreen extends Component {
 				longitude: 3.717786,
 				latitudeDelta: 0.0922,
 				longitudeDelta: 0.0421,
-			},
-			leerkansen: []
+			}
 		}
 	}
-	componentWillMount() {
-		fetch('https://gentlestudent-api.herokuapp.com/api/v1/leerkans')
-			.then(res => res.json())
-			.then(data => this.setState({ leerkansen: data }));
-	}
+
 	componentDidMount() {
+		// fetchLeerkansen
+		this.props.fetchLeerkansen();
+
 		// Set state for default region
 		this.setState({ startRegion: this.state.startRegion });
 
@@ -72,10 +74,8 @@ class MapsScreen extends Component {
 	}
 	render() {
 		const {
-			// seg,
 			startRegion,
 			geoloc,
-			leerkansen,
 		} = this.state;
 		return(
 			<Container style = {styles.container}>
@@ -91,24 +91,12 @@ class MapsScreen extends Component {
 							<Button
 								first
 								active
-								// active={seg === 1 ? true : false}
-								// // onPress={() => this.setState({ seg: 1 })}
-								// style={{
-								// 	borderColor: seg === 1 ? global.COLORS.BLUE : undefined,
-								// 	backgroundColor: global.COLORS.BLUE,
-								// }}
 							>
 								<Text>Kaart</Text>
 							</Button>
 							<Button
 								last
 								onPress={() => Actions.replace('list')}
-								// active={seg === 2 ? true : false}
-								// onPress={() => this.setState({ seg: 2 })}
-								// style={{
-								// 	borderColor: seg === 2 ? global.COLORS.BLUE : undefined,
-								// 	backgroundColor: global.COLORS.BLUE,
-								// }}
 							>
 								<Text>Lijst</Text>
 							</Button>
@@ -132,7 +120,8 @@ class MapsScreen extends Component {
 				</Header>
 				<Content padder>
 					<Text>Latitude: {geoloc.latitude}</Text>
-					<Text>Longitude: {geoloc.longitude}</Text>
+					<Text>Longitude: {geoloc.longitude} | {this.props.leerkansen.loading ? 'loading...': null}</Text>
+					
 				</Content>
 				<MapView
 					style = {styles.maps}
@@ -140,7 +129,7 @@ class MapsScreen extends Component {
 					showsUserLocation
 					// provider={MapView.PROVIDER_GOOGLE} // Google Maps => doesn't have zoom level
 				>
-					{leerkansen.map(lk => {
+					{this.props.leerkansen.items.map(lk => {
 						return(
 							<Marker
 								key={lk._id}
@@ -171,4 +160,17 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default MapsScreen;
+export default connect(
+	(state) => {
+		return {
+			leerkansen: state.leerkansen
+		};
+	},
+	(dispatch) => {
+		return {
+			fetchLeerkansen: () => {
+				dispatch(LeerkansenFetch());
+			}
+		}
+	}
+)(MapsScreen);

@@ -59,7 +59,11 @@ end
 - open **Gentlestudent.xcworkspace** and **not** xcodeproj
 - ⌘+R or click on play button
 
-## Known bugs
-- App starts in black screen, but it loads after a few moments
+## Known bugs or errors
+- Sometimes the app starts in black screen, but it loads after a few moments
 - After changing something simple, the app loads within 1 - 2 minute on device
 - Sometimes you need to build(⌘+B) first and afterwards run(⌘+R), normally Run-command builds first before starting the app, sometimes it doesn't.
+- If you didn't work for a long time with xcode, you'll probably get "`An eror was encountered while attempting to communicate with this device ...`". The solution is to go to xcode > Window > Devices and Simulator > Unplug device > Remove device from the list > Replug device and wait a couple of times.
+- After build it gives error called "`/Users/.../Gentlestudent/node_modules/react-native-permissions/ios/RCTConvert+RNPStatus.h:36:24: Missing ',' between enumerators`". You need to add comma's in the two files manually.
+
+[logo]: http://prntscr.com/jyfwx7 "Error comma's"
