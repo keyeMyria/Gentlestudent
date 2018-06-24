@@ -1,40 +1,34 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import {
-    StyleSheet,
-	View,
-	Text,
-} from 'react-native';
+
+import { View } from 'react-native';
 import {
 	Footer,
-    FooterTab,
-    Button,
-    Icon,
+	FooterTab,
+	Button,
+	Icon,
 } from 'native-base';
 
 class Navigation extends Component {
 	render() {
 		return (
-            <View>
-                <Footer>
-                    <FooterTab>
-                        <Button onPress={() => Actions.info()}>
-                            <Icon name="information-circle" />
-                            {/* <Text>Information</Text> */}
-                        </Button>
-                        <Button onPress={() => alert("scan")}>
-                            <Icon name="compass" /> {/*Temporary icon */}
-                            {/* <Text>Scan</Text> */}
-                        </Button>
-                        <Button onPress={() => Actions.profile()}>
-                            <Icon name="contact" />
-                            {/* <Text>Profile</Text> */}
-                        </Button>
-                    </FooterTab>
-                </Footer>
-            </View>
-        )
-    }
+			<View>
+				<Footer>
+					<FooterTab>
+						<Button onPress={() => Actions.info()}>
+							<Icon name="information-circle" />
+						</Button>
+						<Button onPress={() => Actions.maps()}>
+							<Icon name="compass" />
+						</Button>
+						<Button onPress={() => Actions.profile()}>
+							<Icon name="contact" />
+						</Button>
+					</FooterTab>
+				</Footer>
+			</View>
+		)
+	}
 }
 
 export default Navigation;

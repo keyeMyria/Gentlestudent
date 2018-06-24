@@ -5,6 +5,7 @@ import { Router, Scene } from 'react-native-router-flux';
 
 import HomeScreen from './src/Screens/HomeScreen';
 import MapsScreen from './src/Screens/MapsScreen';
+	import DetailLeerkans from './src/Screens/DetailLeerkans';
 import ListsScreen from './src/Screens/ListsScreen';
 import PrivacyScreen from './src/Screens/PrivacyScreen';
 import OnboardingScreen from './src/Screens/OnboardingScreen';
@@ -29,11 +30,11 @@ const sagaMiddleware = createSagaMiddleware();
 const middleware = applyMiddleware(
 	sagaMiddleware,
 	thunkMiddleware,
-	createLogger({
-		collapsed: true,
-		predicate: (getState, action) => __DEV__,
-		predicate: (getState, action) => !action.type.includes('@@redux-form')
-	})
+	// createLogger({
+	// 	collapsed: true,
+	// 	predicate: (getState, action) => __DEV__,
+	// 	predicate: (getState, action) => !action.type.includes('@@redux-form')
+	// })
 );
 
 const store = createStore(
@@ -86,6 +87,12 @@ class App extends Component {
 										title="List"
 										type='replace'
 										hideNavBar={true}
+									/>
+									<Scene
+										key ="detailLeerkans"
+										component={DetailLeerkans}
+										title="Detail Leerkans"
+										type='replace'
 									/>
 									<Scene
 										key ="privacy"
