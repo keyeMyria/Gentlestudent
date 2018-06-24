@@ -66,4 +66,4 @@ end
 - If you didn't work for a long time with xcode, you'll probably get "`An eror was encountered while attempting to communicate with this device ...`". The solution is to go to xcode > Window > Devices and Simulator > Unplug device > Remove device from the list > Replug device and wait a couple of times.
 - After build it gives error called "`/Users/.../Gentlestudent/node_modules/react-native-permissions/ios/RCTConvert+RNPStatus.h:36:24: Missing ',' between enumerators`". You need to add comma's in the two files manually.
 
-[logo]: http://prntscr.com/jyfwx7 "Error comma's"
+![image](http://i64.tinypic.com/2v0zxfo.png)
